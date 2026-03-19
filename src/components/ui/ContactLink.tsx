@@ -25,7 +25,7 @@ export function ContactLinkCard({ link }: ContactLinkProps) {
       <span className="flex-1 font-medium text-foreground">{link.label}</span>
       <ArrowUpRight
         size={16}
-        className="text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent-cyan"
+        className="text-muted transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-1 group-hover:text-accent-cyan"
       />
     </a>
   );

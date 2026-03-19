@@ -1,16 +1,22 @@
 "use client";
 
-import { Handle, Position, NodeProps } from "@xyflow/react";
+import { Handle, Position } from "@xyflow/react";
 import { Server } from "lucide-react";
+import { motion } from "framer-motion";
 
-export function ServiceNode({ data }: NodeProps<{ label: string }>) {
+export function ServiceNode({ data }: { data: Record<string, unknown> }) {
   return (
-    <div className="px-4 py-2 shadow-md rounded-md bg-card border border-card-border min-w-[120px]">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.4, delay: (data.animationDelay as number) || 0 }}
+      className="px-4 py-2 shadow-md rounded-md bg-card border border-card-border min-w-[120px]"
+    >
       <div className="flex items-center gap-2">
         <div className="p-1.5 rounded-md bg-accent-purple/10">
           <Server className="w-4 h-4 text-accent-purple" />
         </div>
-        <div className="text-sm font-medium text-foreground">{data.label}</div>
+        <div className="text-sm font-medium text-foreground">{data.label as string}</div>
       </div>
 
       <Handle
@@ -33,6 +39,6 @@ export function ServiceNode({ data }: NodeProps<{ label: string }>) {
         position={Position.Bottom}
         className="w-2 h-2 !bg-accent-purple border-0"
       />
-    </div>
+    </motion.div>
   );
 }

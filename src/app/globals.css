@@ -10,17 +10,19 @@
   --accent-purple: #6C5CE7;
   --accent-cyan: #009B7D;
   --nav-bg: rgba(250, 250, 250, 0.8);
+  --nav-border: rgba(228, 228, 231, 0.5);
 }
 
 .dark {
-  --background: #0a0a0a;
+  --background: #050505;
   --foreground: #fafafa;
   --muted: #a1a1aa;
-  --card: #18181b;
-  --card-border: #27272a;
+  --card: #0f0f11;
+  --card-border: #1a1a1f;
   --accent-purple: #7C6EF6;
   --accent-cyan: #00D4AA;
-  --nav-bg: rgba(10, 10, 10, 0.8);
+  --nav-bg: rgba(5, 5, 5, 0.85);
+  --nav-border: rgba(39, 39, 42, 0.5);
 }
 
 /* ─── Tailwind v4 theme inline ─── */
@@ -33,6 +35,7 @@
   --color-accent-purple: var(--accent-purple);
   --color-accent-cyan: var(--accent-cyan);
   --color-nav-bg: var(--nav-bg);
+  --color-nav-border: var(--nav-border);
 }
 
 /* ─── Base styles ─── */
@@ -67,9 +70,23 @@ body {
   border-radius: 3px;
 }
 
+/* ─── Hero gradient glow ─── */
+.dark .hero-gradient {
+  text-shadow: 0 0 40px rgba(124, 110, 246, 0.15);
+}
+
+/* ─── Glow utilities ─── */
+.glow-purple {
+  box-shadow: 0 0 20px var(--accent-purple), 0 0 40px rgba(124, 110, 246, 0.15);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px var(--accent-cyan), 0 0 40px rgba(0, 212, 170, 0.15);
+}
+
 /* ─── React Flow overrides ─── */
 .react-flow__background {
-  background-color: var(--card) !important;
+  background-color: var(--card) !-important;
 }
 
 .react-flow__minimap {
@@ -81,4 +98,22 @@ body {
   border-color: var(--card-border) !important;
   color: var(--foreground) !important;
   fill: var(--foreground) !important;
+}
+
+.react-flow__edge path {
+  stroke-dasharray: 5;
+  animation: flowDash 1.5s linear infinite;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+  transition-delay: 0.8s; /* Fade in after nodes */
+}
+
+.react-flow__edge.animated path {
+  opacity: 1;
+}
+
+@keyframes flowDash {
+  to {
+    stroke-dashoffset: -10;
+  }
 }

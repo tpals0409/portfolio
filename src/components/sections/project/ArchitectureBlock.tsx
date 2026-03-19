@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { DIAGRAM_TABS } from "@/lib/constants";
 import { DIAGRAM_DATA } from "@/components/diagrams/diagram-data";
 import DiagramWrapper from "@/components/diagrams/DiagramWrapper";
@@ -11,19 +11,35 @@ import { cn } from "@/lib/utils";
 export default function ArchitectureBlock() {
   const [activeTab, setActiveTab] = useState(DIAGRAM_TABS[0].id);
   const [isMounted, setIsMounted] = useState(false);
+  const [animated, setAnimated] = useState(false);
+  const blockRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(blockRef, { once: false, amount: 0.3 });
 
   useEffect(() => {
-    // Fix for react-hooks/set-state-in-effect: wrap in a non-sync callback
     const timer = setTimeout(() => setIsMounted(true), 0);
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (isInView) {
+      const timer = setTimeout(() => setAnimated(true), 0);
+      return () => clearTimeout(timer);
+    }
+  }, [isInView]);
+
+  const handleTabSwitch = (tabId: string) => {
+    setAnimated(false);
+    setActiveTab(tabId);
+    const timer = setTimeout(() => setAnimated(true), 100);
+    return () => clearTimeout(timer);
+  };
+
   const currentData = DIAGRAM_DATA[activeTab] || DIAGRAM_DATA.overall;
 
   return (
-    <div className="space-y-6">
+    <div ref={blockRef} className="space-y-6">
       <div className="flex flex-col gap-4">
-        <SectionLabel label="Architecture" />
+        <SectionLabel>Architecture</SectionLabel>
         <h3 className="text-2xl font-bold text-foreground">System Design</h3>
       </div>
 
@@ -32,7 +48,7 @@ export default function ArchitectureBlock() {
         {DIAGRAM_TABS.map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
+            onClick={() => handleTabSwitch(tab.id)}
             className={cn(
               "px-4 py-2 text-sm font-medium transition-all relative whitespace-nowrap",
               activeTab === tab.id
@@ -67,6 +83,7 @@ export default function ArchitectureBlock() {
               <DiagramWrapper
                 nodes={currentData.nodes}
                 edges={currentData.edges}
+                animated={animated}
               />
             </motion.div>
           </AnimatePresence>

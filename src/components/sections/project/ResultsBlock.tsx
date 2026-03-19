@@ -17,8 +17,8 @@ export function ResultsBlock() {
         Results
       </motion.h3>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-        {PROJECT_STATS.map((stat) => (
-          <AnimatedCounter key={stat.label} stat={stat} />
+        {PROJECT_STATS.map((stat, index) => (
+          <AnimatedCounter key={stat.label} stat={stat} index={index} />
         ))}
       </div>
     </div>
