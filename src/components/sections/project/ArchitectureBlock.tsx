@@ -5,7 +5,6 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { DIAGRAM_TABS } from "@/lib/constants";
 import { DIAGRAM_DATA } from "@/components/diagrams/diagram-data";
 import DiagramWrapper from "@/components/diagrams/DiagramWrapper";
-import SectionLabel from "@/components/ui/SectionLabel";
 import { cn } from "@/lib/utils";
 
 export default function ArchitectureBlock() {
@@ -30,18 +29,15 @@ export default function ArchitectureBlock() {
   const handleTabSwitch = (tabId: string) => {
     setAnimated(false);
     setActiveTab(tabId);
-    const timer = setTimeout(() => setAnimated(true), 100);
-    return () => clearTimeout(timer);
+    setTimeout(() => setAnimated(true), 100);
   };
 
   const currentData = DIAGRAM_DATA[activeTab] || DIAGRAM_DATA.overall;
+  const currentTab = DIAGRAM_TABS.find((t) => t.id === activeTab);
 
   return (
     <div ref={blockRef} className="space-y-6">
-      <div className="flex flex-col gap-4">
-        <SectionLabel>Architecture</SectionLabel>
-        <h3 className="text-2xl font-bold text-foreground">System Design</h3>
-      </div>
+      <h3 className="text-xl font-bold text-foreground">System Design</h3>
 
       {/* Tabs */}
       <div className="flex flex-wrap gap-2 pb-2 overflow-x-auto no-scrollbar border-b border-card-border">
@@ -67,6 +63,11 @@ export default function ArchitectureBlock() {
           </button>
         ))}
       </div>
+
+      {/* Tab description */}
+      {currentTab?.description && (
+        <p className="text-sm text-muted">{currentTab.description}</p>
+      )}
 
       {/* Diagram Area */}
       <div className="relative aspect-[16/9] w-full min-h-[400px]">

@@ -26,12 +26,22 @@ export function AnimatedCounter({ stat, index }: AnimatedCounterProps) {
       className="rounded-xl border border-card-border bg-card p-6 text-center"
     >
       <p className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-accent-purple to-accent-cyan bg-clip-text text-transparent">
+        {stat.prefix && (
+          <span className="bg-gradient-to-r from-accent-purple to-accent-cyan bg-clip-text text-transparent">
+            {stat.prefix}
+          </span>
+        )}
         {displayValue}
-        <span className="bg-gradient-to-r from-accent-purple to-accent-cyan bg-clip-text text-transparent">
-          {stat.suffix}
-        </span>
+        {stat.suffix && (
+          <span className="bg-gradient-to-r from-accent-purple to-accent-cyan bg-clip-text text-transparent">
+            {stat.suffix}
+          </span>
+        )}
       </p>
       <p className="mt-2 text-sm text-muted">{stat.label}</p>
+      {stat.context && (
+        <p className="mt-1 text-xs text-muted/70">{stat.context}</p>
+      )}
     </motion.div>
   );
 }

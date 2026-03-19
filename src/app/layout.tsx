@@ -13,7 +13,7 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: "김세민 | AI DevOps Engineer",
   description:
-    "AI 에이전트 12인팀을 설계하고, 165회 이상의 프로덕션 배포를 수행한 AI DevOps 엔지니어 포트폴리오",
+    "AI 에이전트 12인팀을 설계하고, 6개 마이크로서비스를 구축한 AI DevOps 엔지니어 김세민의 포트폴리오",
   keywords: [
     "AI DevOps",
     "Backend Developer",

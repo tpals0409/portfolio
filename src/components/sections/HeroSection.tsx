@@ -81,8 +81,8 @@ export function HeroSection() {
         className="pointer-events-none absolute inset-0 overflow-hidden"
         variants={bgVariants}
       >
-        <div className="absolute left-1/2 top-1/3 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-purple/5 blur-[120px] md:h-[500px] md:w-[500px]" />
-        <div className="absolute left-1/3 top-2/3 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-cyan/5 blur-[120px] md:h-[400px] md:w-[400px]" />
+        <div className="absolute left-1/2 top-1/3 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-purple/10 blur-[120px] md:h-[500px] md:w-[500px]" />
+        <div className="absolute left-1/3 top-2/3 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-cyan/10 blur-[120px] md:h-[400px] md:w-[400px]" />
       </motion.div>
 
       <div className="relative z-10 max-w-3xl text-center">
@@ -115,7 +115,7 @@ export function HeroSection() {
       <motion.a
         href="#about"
         variants={scrollVariants}
-        className="absolute bottom-12 flex flex-col items-center gap-2 text-muted transition-colors hover:text-foreground"
+        className="absolute bottom-8 flex flex-col items-center gap-2 text-muted transition-colors hover:text-foreground"
       >
         <span className="text-xs uppercase tracking-widest">
           {HERO.scrollLabel}

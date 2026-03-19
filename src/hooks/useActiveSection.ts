@@ -1,10 +1,21 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { SECTION_IDS } from "@/lib/constants";
 
 export function useActiveSection() {
   const [activeSection, setActiveSection] = useState("");
+  const atBottomRef = useRef(false);
+  const observerSectionRef = useRef("");
+
+  const updateActive = useCallback(() => {
+    if (atBottomRef.current) {
+      const sectionIds = Object.values(SECTION_IDS);
+      setActiveSection(sectionIds[sectionIds.length - 1]);
+    } else {
+      setActiveSection(observerSectionRef.current);
+    }
+  }, []);
 
   useEffect(() => {
     const sectionIds = Object.values(SECTION_IDS);
@@ -18,7 +29,8 @@ export function useActiveSection() {
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+            observerSectionRef.current = entry.target.id;
+            updateActive();
           }
         }
       },
@@ -27,8 +39,24 @@ export function useActiveSection() {
 
     elements.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
-  }, []);
+    const onScroll = () => {
+      const wasAtBottom = atBottomRef.current;
+      atBottomRef.current =
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 100;
+
+      if (atBottomRef.current !== wasAtBottom) {
+        updateActive();
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [updateActive]);
 
   return activeSection;
 }

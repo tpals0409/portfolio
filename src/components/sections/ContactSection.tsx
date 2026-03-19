@@ -7,7 +7,7 @@ import SectionLabel from "@/components/ui/SectionLabel";
 import { ContactLinkCard } from "@/components/ui/ContactLink";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
@@ -17,8 +17,8 @@ const fadeUp = {
 
 export function ContactSection() {
   return (
-    <SectionWrapper id="contact">
-      <SectionLabel>Contact</SectionLabel>
+    <SectionWrapper id="contact" className="py-12 md:py-20">
+      <SectionLabel color="cyan">Contact</SectionLabel>
 
       <motion.h2
         initial="hidden"

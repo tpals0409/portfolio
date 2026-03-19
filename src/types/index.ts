@@ -29,7 +29,9 @@ export interface Agent {
 export interface ProjectStat {
   label: string;
   value: number;
+  prefix?: string;
   suffix: string;
+  context?: string;
 }
 
 export interface ContactLink {
@@ -41,4 +43,39 @@ export interface ContactLink {
 export interface DiagramTab {
   id: string;
   label: string;
+  description?: string;
+}
+
+export interface ComparisonRow {
+  criteria: string;
+  chosen: string;
+  alternative: string;
+}
+
+export interface TechDecision {
+  title: string;
+  reasoning: string;
+  result: string;
+  color: string;
+  highlight: string;
+  highlightLabel: string;
+  comparison?: ComparisonRow[];
+  featured?: boolean;
+}
+
+export interface Principle {
+  category: string;
+  principle: string;
+  evidence: string;
+  impact?: string;
+  color: "purple" | "cyan";
+}
+
+export interface CodeSnippet {
+  id: string;
+  title: string;
+  filepath: string;
+  description: string;
+  code: string;
+  language: string;
 }

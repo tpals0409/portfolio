@@ -17,15 +17,15 @@ export function ContactLinkCard({ link }: ContactLinkProps) {
       href={link.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-center gap-4 rounded-xl border border-card-border bg-card p-6 transition-all hover:border-accent-cyan/50 hover:shadow-lg hover:shadow-accent-cyan/5"
+      className="group flex items-center gap-4 rounded-2xl border border-card-border bg-card p-6 transition-all hover:border-accent-purple/50 hover:shadow-lg hover:shadow-accent-purple/5"
     >
-      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-background text-muted transition-colors group-hover:text-accent-cyan">
+      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-background text-muted transition-colors group-hover:text-accent-purple">
         {iconMap[link.icon]}
       </div>
       <span className="flex-1 font-medium text-foreground">{link.label}</span>
       <ArrowUpRight
         size={16}
-        className="text-muted transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-1 group-hover:text-accent-cyan"
+        className="text-muted transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-1 group-hover:text-accent-purple"
       />
     </a>
   );

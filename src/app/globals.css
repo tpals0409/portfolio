@@ -9,8 +9,12 @@
   --card-border: #e4e4e7;
   --accent-purple: #6C5CE7;
   --accent-cyan: #009B7D;
+  --accent-mid: #4B8BE5;
   --nav-bg: rgba(250, 250, 250, 0.8);
   --nav-border: rgba(228, 228, 231, 0.5);
+  --dot-close: #EC6A5E;
+  --dot-minimize: #F4BF4F;
+  --dot-maximize: #61C554;
 }
 
 .dark {
@@ -21,8 +25,12 @@
   --card-border: #1a1a1f;
   --accent-purple: #7C6EF6;
   --accent-cyan: #00D4AA;
+  --accent-mid: #5B9BF5;
   --nav-bg: rgba(5, 5, 5, 0.85);
   --nav-border: rgba(39, 39, 42, 0.5);
+  --dot-close: #EC6A5E;
+  --dot-minimize: #F4BF4F;
+  --dot-maximize: #61C554;
 }
 
 /* ─── Tailwind v4 theme inline ─── */
@@ -34,8 +42,12 @@
   --color-card-border: var(--card-border);
   --color-accent-purple: var(--accent-purple);
   --color-accent-cyan: var(--accent-cyan);
+  --color-accent-mid: var(--accent-mid);
   --color-nav-bg: var(--nav-bg);
   --color-nav-border: var(--nav-border);
+  --color-dot-close: var(--dot-close);
+  --color-dot-minimize: var(--dot-minimize);
+  --color-dot-maximize: var(--dot-maximize);
 }
 
 /* ─── Base styles ─── */
@@ -86,7 +98,7 @@ body {
 
 /* ─── React Flow overrides ─── */
 .react-flow__background {
-  background-color: var(--card) !-important;
+  background-color: var(--card) !important;
 }
 
 .react-flow__minimap {
@@ -116,4 +128,45 @@ body {
   to {
     stroke-dashoffset: -10;
   }
+}
+
+/* Code blocks */
+.code-block {
+  border: 2px solid var(--card-border);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+.dark .code-block {
+  border-width: 1px;
+  box-shadow: none;
+}
+.code-block::-webkit-scrollbar {
+  height: 4px;
+}
+.code-block::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 2px;
+}
+
+/* Browser mockup viewport */
+.browser-viewport::-webkit-scrollbar {
+  width: 4px;
+}
+.browser-viewport::-webkit-scrollbar-track {
+  background: transparent;
+}
+.browser-viewport::-webkit-scrollbar-thumb {
+  background: var(--card-border);
+  border-radius: 2px;
+}
+.browser-viewport {
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.dark .browser-viewport {
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+.browser-mockup {
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08), 0 8px 24px -4px rgba(0, 0, 0, 0.12);
+}
+.dark .browser-mockup {
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.3), 0 8px 32px -4px rgba(0, 0, 0, 0.5);
 }
