@@ -13,7 +13,9 @@ export default function ArchitectureBlock() {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    // Fix for react-hooks/set-state-in-effect: wrap in a non-sync callback
+    const timer = setTimeout(() => setIsMounted(true), 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const currentData = DIAGRAM_DATA[activeTab] || DIAGRAM_DATA.overall;
@@ -22,11 +24,11 @@ export default function ArchitectureBlock() {
     <div className="space-y-6">
       <div className="flex flex-col gap-4">
         <SectionLabel label="Architecture" />
-        <h3 className="text-2xl font-bold text-[var(--foreground)]">System Design</h3>
+        <h3 className="text-2xl font-bold text-foreground">System Design</h3>
       </div>
 
       {/* Tabs */}
-      <div className="flex flex-wrap gap-2 pb-2 overflow-x-auto no-scrollbar border-b border-[var(--card-border)]">
+      <div className="flex flex-wrap gap-2 pb-2 overflow-x-auto no-scrollbar border-b border-card-border">
         {DIAGRAM_TABS.map((tab) => (
           <button
             key={tab.id}
@@ -34,15 +36,15 @@ export default function ArchitectureBlock() {
             className={cn(
               "px-4 py-2 text-sm font-medium transition-all relative whitespace-nowrap",
               activeTab === tab.id
-                ? "text-[var(--accent-purple)]"
-                : "text-[var(--muted)] hover:text-[var(--foreground)]"
+                ? "text-accent-purple"
+                : "text-muted hover:text-foreground"
             )}
           >
             {tab.label}
             {activeTab === tab.id && (
               <motion.div
                 layoutId="activeTab"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--accent-purple)]"
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent-purple"
                 initial={false}
               />
             )}
@@ -69,7 +71,7 @@ export default function ArchitectureBlock() {
             </motion.div>
           </AnimatePresence>
         ) : (
-          <div className="w-full h-full border border-[var(--card-border)] rounded-xl bg-[var(--card)] animate-pulse" />
+          <div className="w-full h-full border border-card-border rounded-xl bg-card animate-pulse" />
         )}
       </div>
     </div>

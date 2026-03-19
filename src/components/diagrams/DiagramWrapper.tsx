@@ -8,7 +8,9 @@ import {
   Node,
   Edge,
   BackgroundVariant,
+  ColorMode,
 } from "@xyflow/react";
+import { useTheme } from "next-themes";
 import "@xyflow/react/dist/style.css";
 
 import { ServiceNode } from "./nodes/ServiceNode";
@@ -21,6 +23,8 @@ interface DiagramWrapperProps {
 }
 
 export default function DiagramWrapper({ nodes, edges }: DiagramWrapperProps) {
+  const { theme, resolvedTheme } = useTheme();
+  
   const nodeTypes = useMemo(
     () => ({
       service: ServiceNode,
@@ -30,15 +34,17 @@ export default function DiagramWrapper({ nodes, edges }: DiagramWrapperProps) {
     []
   );
 
+  const colorMode = (resolvedTheme || theme || "light") as ColorMode;
+
   return (
-    <div className="w-full h-full min-h-[400px] border border-[var(--card-border)] rounded-xl overflow-hidden bg-[var(--card)]">
+    <div className="w-full h-full min-h-[400px] border border-card-border rounded-xl overflow-hidden bg-card">
       <ReactFlow
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
         fitView
-        className="bg-[var(--card)]"
-        colorMode="system"
+        className="bg-card"
+        colorMode={colorMode}
       >
         <Background
           variant={BackgroundVariant.Dots}

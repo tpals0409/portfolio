@@ -72,9 +72,9 @@ export const getDiagramData = (id: DiagramId): DiagramData => {
         nodes: [
           { id: 'trigger', type: 'service', data: { label: 'Submission' }, position: { x: 0, y: 100 } },
           { id: 'orchestrator', type: 'service', data: { label: 'Orchestrator' }, position: { x: 250, y: 100 } },
-          { id: 'analyzer', type: 'service', data: { label: 'Analyzer' }, position: { x: 500, y: 0 } },
+          { id: 'analyzer', type: 'service', data: { label: 'Analyzer' }, position: { x: 500, y: -100 } },
           { id: 'reviewer', type: 'service', data: { label: 'Reviewer' }, position: { x: 500, y: 100 } },
-          { id: 'scorer', type: 'service', data: { label: 'Scorer' }, position: { x: 500, y: 200 } },
+          { id: 'scorer', type: 'service', data: { label: 'Scorer' }, position: { x: 500, y: 300 } },
           { id: 'aggregator', type: 'service', data: { label: 'Aggregator' }, position: { x: 750, y: 100 } },
           { id: 'db', type: 'database', data: { label: 'Result DB' }, position: { x: 1000, y: 100 } },
         ],
@@ -97,7 +97,7 @@ export const getDiagramData = (id: DiagramId): DiagramData => {
           { id: 'svc1', type: 'service', data: { label: 'Svc A (Local)' }, position: { x: 250, y: 100 } },
           { id: 'broker', type: 'queue', data: { label: 'Event Broker' }, position: { x: 500, y: 100 } },
           { id: 'svc2', type: 'service', data: { label: 'Svc B (Local)' }, position: { x: 750, y: 100 } },
-          { id: 'comp', type: 'service', data: { label: 'Compensator' }, position: { x: 500, y: 300 } },
+          { id: 'comp', type: 'service', data: { label: 'Compensator' }, position: { x: 500, y: 350 } },
         ],
         edges: [
           createEdge('e1-2', 'start', 'svc1'),
@@ -112,8 +112,8 @@ export const getDiagramData = (id: DiagramId): DiagramData => {
       return {
         nodes: [
           { id: 'cluster', type: 'service', data: { label: 'K3s Cluster' }, position: { x: 0, y: 100 } },
-          { id: 'prom', type: 'service', data: { label: 'Prometheus' }, position: { x: 250, y: 50 } },
-          { id: 'loki', type: 'service', data: { label: 'Loki' }, position: { x: 250, y: 150 } },
+          { id: 'prom', type: 'service', data: { label: 'Prometheus' }, position: { x: 250, y: -50 } },
+          { id: 'loki', type: 'service', data: { label: 'Loki' }, position: { x: 250, y: 250 } },
           { id: 'grafana', type: 'service', data: { label: 'Grafana' }, position: { x: 500, y: 100 } },
           { id: 'alert', type: 'service', data: { label: 'AlertManager' }, position: { x: 750, y: 100 } },
         ],
