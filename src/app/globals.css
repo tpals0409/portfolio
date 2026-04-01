@@ -7,9 +7,9 @@
   --muted: #71717a;
   --card: #f4f4f5;
   --card-border: #e4e4e7;
-  --accent-purple: #6C5CE7;
-  --accent-cyan: #009B7D;
-  --accent-mid: #4B8BE5;
+  --accent-purple: #0a0a0a;
+  --accent-cyan: #0a0a0a;
+  --accent-mid: #0a0a0a;
   --nav-bg: rgba(250, 250, 250, 0.8);
   --nav-border: rgba(228, 228, 231, 0.5);
   --dot-close: #EC6A5E;
@@ -23,9 +23,9 @@
   --muted: #a1a1aa;
   --card: #0f0f11;
   --card-border: #1a1a1f;
-  --accent-purple: #7C6EF6;
-  --accent-cyan: #00D4AA;
-  --accent-mid: #5B9BF5;
+  --accent-purple: #fafafa;
+  --accent-cyan: #fafafa;
+  --accent-mid: #fafafa;
   --nav-bg: rgba(5, 5, 5, 0.85);
   --nav-border: rgba(39, 39, 42, 0.5);
   --dot-close: #EC6A5E;
@@ -52,7 +52,7 @@
 
 /* ─── Base styles ─── */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 body {
@@ -64,8 +64,8 @@ body {
 
 /* ─── Selection ─── */
 ::selection {
-  background-color: var(--accent-purple);
-  color: #fff;
+  background-color: var(--foreground);
+  color: var(--background);
 }
 
 /* ─── Scrollbar ─── */
@@ -82,18 +82,19 @@ body {
   border-radius: 3px;
 }
 
-/* ─── Hero gradient glow ─── */
-.dark .hero-gradient {
-  text-shadow: 0 0 40px rgba(124, 110, 246, 0.15);
-}
-
-/* ─── Glow utilities ─── */
+/* ─── Glow utilities (monochrome) ─── */
 .glow-purple {
-  box-shadow: 0 0 20px var(--accent-purple), 0 0 40px rgba(124, 110, 246, 0.15);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+.dark .glow-purple {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
 }
 
 .glow-cyan {
-  box-shadow: 0 0 20px var(--accent-cyan), 0 0 40px rgba(0, 212, 170, 0.15);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+.dark .glow-cyan {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
 }
 
 /* ─── React Flow overrides ─── */
@@ -145,6 +146,48 @@ body {
 .code-block::-webkit-scrollbar-thumb {
   background: var(--muted);
   border-radius: 2px;
+}
+
+/* ─── SVG Diagram tooltip ─── */
+.diagram-tooltip {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.diagram-node:hover .diagram-tooltip {
+  opacity: 1;
+}
+.diagram-node {
+  cursor: default;
+}
+.diagram-node:hover rect {
+  stroke: var(--foreground);
+  transition: stroke 0.2s ease;
+}
+
+/* ─── Scroll-driven keyframes ─── */
+@keyframes wheelBounce {
+  0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  30% { transform: translateX(-50%) translateY(12px); opacity: 1; }
+  50% { transform: translateX(-50%) translateY(6px); opacity: 0.7; }
+  65% { transform: translateX(-50%) translateY(10px); opacity: 0.9; }
+  75% { transform: translateX(-50%) translateY(8px); opacity: 0.5; }
+  85% { transform: translateX(-50%) translateY(14px); opacity: 0; }
+  100% { transform: translateX(-50%) translateY(0); opacity: 0; }
+}
+
+@keyframes scrollTextFade {
+  0%, 85%, 100% { opacity: 0.5; }
+  30% { opacity: 1; }
+}
+
+@keyframes archScrollPulse {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(3px); opacity: 1; }
+}
+
+@keyframes hScrollPulse {
+  0%, 100% { transform: translateX(0); opacity: 0.4; }
+  50% { transform: translateX(3px); opacity: 1; }
 }
 
 /* Browser mockup viewport */

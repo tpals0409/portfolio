@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { DIAGRAM_TABS } from "@/lib/constants";
 import { DIAGRAM_DATA } from "@/components/diagrams/diagram-data";
-import DiagramWrapper from "@/components/diagrams/DiagramWrapper";
+import SVGDiagram from "@/components/diagrams/SVGDiagram";
 import { cn } from "@/lib/utils";
 
 export default function ArchitectureBlock() {
@@ -81,10 +81,8 @@ export default function ArchitectureBlock() {
               transition={{ duration: 0.2 }}
               className="w-full h-full"
             >
-              <DiagramWrapper
-                nodes={currentData.nodes}
-                edges={currentData.edges}
-                animated={animated}
+              <SVGDiagram
+                data={currentData}
               />
             </motion.div>
           </AnimatePresence>

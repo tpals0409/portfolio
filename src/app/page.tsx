@@ -1,18 +1,31 @@
-import { Navbar } from "@/components/layout/Navbar";
+"use client";
+
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ProjectSection } from "@/components/sections/ProjectSection";
 import { ContactSection } from "@/components/sections/ContactSection";
+import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
+import { SectionDots } from "@/components/ui/SectionDots";
+import { SectionBreak } from "@/components/ui/SectionBreak";
+import { useSmoothScroll } from "@/hooks/useSmoothScroll";
+import { useScrollBrake } from "@/hooks/useScrollBrake";
 
 export default function Home() {
+  const scrollY = useSmoothScroll();
+  useScrollBrake();
+
   return (
     <>
-      <Navbar />
+      <ScrollProgressBar scrollY={scrollY} />
+      <SectionDots scrollY={scrollY} />
       <main>
-        <HeroSection />
+        <HeroSection scrollY={scrollY} />
+        <SectionBreak id="brake-about" label="About Me" />
         <AboutSection />
-        <ProjectSection />
+        <SectionBreak id="brake-project" label="Project" />
+        <ProjectSection scrollY={scrollY} />
+        <SectionBreak id="brake-contact" label="Contact" />
         <ContactSection />
       </main>
       <Footer />

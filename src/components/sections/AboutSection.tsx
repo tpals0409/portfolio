@@ -1,99 +1,147 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { ABOUT, TECH_CATEGORIES } from "@/lib/constants";
-import SectionWrapper from "@/components/ui/SectionWrapper";
-import SectionLabel from "@/components/ui/SectionLabel";
-import { TechBadge } from "@/components/ui/TechBadge";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.1, ease: "easeOut" as const },
-  }),
-};
-
-function renderHeadline(text: string, accent: string) {
-  const parts = text.split(accent);
-  if (parts.length < 2) return text;
+function SkillTag({ label }: { label: string }) {
   return (
-    <>
-      {parts[0]}
-      <span className="relative inline-block">
-        {accent}
-        <span className="absolute bottom-0 left-0 h-[3px] w-full rounded-full bg-accent-cyan" />
-      </span>
-      {parts[1]}
-    </>
+    <span className="m-[3px] inline-block rounded-full bg-background px-3.5 py-1.5 text-sm font-medium text-foreground">
+      {label}
+    </span>
+  );
+}
+
+function BentoTile({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.08 });
+
+  return (
+    <motion.div
+      ref={ref}
+      animate={{
+        opacity: inView ? 1 : 0,
+        y: inView ? 0 : 44,
+        scale: inView ? 1 : 0.97,
+      }}
+      transition={{
+        duration: 0.7,
+        delay,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className={`rounded-2xl border border-card-border bg-card p-7 shadow-sm ${className}`}
+    >
+      {children}
+    </motion.div>
   );
 }
 
 export function AboutSection() {
+  const catMap: Record<string, (typeof TECH_CATEGORIES)[number]> = {};
+  TECH_CATEGORIES.forEach((c) => {
+    catMap[c.name] = c;
+  });
+
   return (
-    <SectionWrapper id="about">
-      <SectionLabel color="cyan">About</SectionLabel>
+    <section id="about" className="py-20 md:py-32">
+      <div className="mx-auto max-w-[1100px] px-6">
+        <div className="grid grid-cols-1 gap-3.5 md:grid-cols-4 md:grid-rows-3">
+          {/* Role */}
+          <BentoTile delay={0} className="md:col-span-2 md:row-span-2 !pt-10 !pb-9">
+            <div className="mb-8 flex flex-col items-center">
+              <Image
+                src="/profile.jpg"
+                alt={`${ABOUT.name} profile`}
+                width={160}
+                height={160}
+                className="h-[160px] w-[160px] rounded-full border-2 border-card-border object-cover"
+                priority
+              />
+              <p className="mt-5 text-lg font-bold text-foreground">{ABOUT.name}</p>
+              <p className="mt-1 text-sm text-muted">{ABOUT.role}</p>
+            </div>
+            <span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted">
+              Role
+            </span>
+            <h2 className="mt-3 text-2xl font-extrabold leading-tight text-foreground md:text-3xl lg:text-[40px]" style={{ letterSpacing: "-0.04em" }}>
+              AI DevOps &<br />
+              Backend Developer
+            </h2>
+            <p className="mt-4 text-[15px] leading-relaxed text-muted">
+              {ABOUT.description}
+            </p>
+          </BentoTile>
 
-      <div className="mx-auto mt-8 grid max-w-5xl items-start gap-12 md:grid-cols-[1fr_2fr]">
-        {/* Left column: photo + name + role */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={fadeUp}
-          custom={0}
-          className="flex flex-col items-center md:items-start"
-        >
-          <Image
-            src="/profile.jpg"
-            alt={`${ABOUT.name} 프로필 사진`}
-            width={192}
-            height={192}
-            className="h-48 w-48 rounded-full border-2 border-card-border object-cover"
-            priority
-          />
-          <h2 className="mt-5 text-2xl font-bold">{ABOUT.name}</h2>
-          <p className="mt-1 text-sm text-muted">{ABOUT.role}</p>
-        </motion.div>
+          {/* Backend */}
+          <BentoTile delay={0.08} className="md:col-span-2">
+            <span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted">
+              Backend
+            </span>
+            <div className="mt-3.5 flex flex-wrap">
+              {catMap["Backend"]?.items.map((s) => (
+                <SkillTag key={s.name} label={s.name} />
+              ))}
+            </div>
+          </BentoTile>
 
-        {/* Right column: headline + tech stacks */}
-        <div>
-          <motion.h3
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={fadeUp}
-            custom={1}
-            className="whitespace-pre-line text-2xl font-bold leading-snug md:text-3xl"
-          >
-            {renderHeadline(ABOUT.headline, ABOUT.headlineAccent)}
-          </motion.h3>
+          {/* AI & LLM */}
+          <BentoTile delay={0.16} className="md:col-span-2">
+            <span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted">
+              AI & LLM
+            </span>
+            <div className="mt-3.5 flex flex-wrap">
+              {catMap["AI / LLM"]?.items.map((s) => (
+                <SkillTag key={s.name} label={s.name} />
+              ))}
+            </div>
+          </BentoTile>
 
-          <div className="mt-10 space-y-6">
-            {TECH_CATEGORIES.map((category, catIdx) => (
-              <motion.div
-                key={category.name}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={fadeUp}
-                custom={catIdx + 2}
-              >
-                <h4 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted">
-                  {category.name}
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {category.items.map((tech) => (
-                    <TechBadge key={tech.name} name={tech.name} />
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          {/* Infra & DevOps */}
+          <BentoTile delay={0.24} className="md:col-span-1">
+            <span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted">
+              Infra & DevOps
+            </span>
+            <div className="mt-3 flex flex-wrap">
+              {catMap["Infra / DevOps"]?.items.map((s) => (
+                <SkillTag key={s.name} label={s.name} />
+              ))}
+            </div>
+          </BentoTile>
+
+          {/* Data */}
+          <BentoTile delay={0.32} className="md:col-span-1">
+            <span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted">
+              Data
+            </span>
+            <div className="mt-3 flex flex-wrap">
+              {catMap["Data"]?.items.map((s) => (
+                <SkillTag key={s.name} label={s.name} />
+              ))}
+            </div>
+          </BentoTile>
+
+          {/* Frontend */}
+          <BentoTile delay={0.4} className="md:col-span-2">
+            <span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted">
+              Frontend
+            </span>
+            <div className="mt-3 flex flex-wrap">
+              {catMap["Frontend"]?.items.map((s) => (
+                <SkillTag key={s.name} label={s.name} />
+              ))}
+            </div>
+          </BentoTile>
         </div>
       </div>
-    </SectionWrapper>
+    </section>
   );
 }

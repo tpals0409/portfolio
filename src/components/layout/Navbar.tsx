@@ -28,7 +28,7 @@ export function Navbar() {
 
   return (
     <nav className="fixed top-0 z-50 w-full p-0 pt-0" style={{ willChange: "transform" }}>
-      <div className="mx-auto max-w-5xl px-4 pt-3">
+      <div className="mx-auto max-w-[1100px] px-4 pt-3">
         <div
           className={cn(
             "rounded-2xl border transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300",
@@ -57,7 +57,7 @@ export function Navbar() {
                     className={cn(
                       "relative text-sm font-medium transition-colors",
                       isActive
-                        ? "text-accent-purple"
+                        ? "text-foreground"
                         : "text-muted hover:text-foreground"
                     )}
                   >
@@ -65,7 +65,7 @@ export function Navbar() {
                     {isActive && (
                       <motion.span
                         layoutId="nav-indicator"
-                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent-purple"
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-foreground"
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                         style={{ willChange: "transform" }}
                       />
@@ -108,7 +108,7 @@ export function Navbar() {
                         className={cn(
                           "rounded-lg px-4 py-3 text-sm font-medium transition-colors",
                           isActive
-                            ? "bg-card text-accent-purple"
+                            ? "bg-card text-foreground"
                             : "text-muted hover:bg-card hover:text-foreground"
                         )}
                       >

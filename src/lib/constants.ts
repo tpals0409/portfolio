@@ -379,6 +379,7 @@ export const PROJECT_STATS: ProjectStat[] = [
 ];
 
 export const DIAGRAM_TABS: DiagramTab[] = [
+  { id: "agent-orchestration", label: "Agent Orchestration", description: "12개 AI 에이전트 3-Tier 오케스트레이션 — 설계·구현·운영 역할 분담, 프롬프트 기반 페르소나" },
   { id: "overall", label: "Overall", description: "Next.js → Gateway → 6개 마이크로서비스 + 비동기 워커 (PostgreSQL, RabbitMQ, Redis)" },
   { id: "api-gateway", label: "API Gateway", description: "OAuth + JWT + Rate Limit + 프록시 미들웨어 파이프라인 (화이트리스트 기반 라우팅)" },
   { id: "ai-pipeline", label: "AI Pipeline", description: "코드 제출 → GitHub Push → AI 분석 전 과정 자동화 (SSE 실시간 스트리밍)" },
