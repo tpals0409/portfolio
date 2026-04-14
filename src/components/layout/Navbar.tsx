@@ -6,12 +6,15 @@ import { Menu, X } from "lucide-react";
 import { NAV_ITEMS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { useActiveSection } from "@/hooks/useActiveSection";
+import { useLocale } from "@/lib/i18n/context";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { LanguageToggle } from "@/components/ui/LanguageToggle";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const activeSection = useActiveSection();
+  const { t, ts } = useLocale();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -43,7 +46,7 @@ export function Navbar() {
               href="#hero"
               className="text-lg font-bold tracking-tight text-foreground"
             >
-              김세민
+              {ts("ui.navName")}
             </a>
 
             {/* Center: Desktop nav */}
@@ -61,7 +64,7 @@ export function Navbar() {
                         : "text-muted hover:text-foreground"
                     )}
                   >
-                    {item.label}
+                    {t(item.label)}
                     {isActive && (
                       <motion.span
                         layoutId="nav-indicator"
@@ -75,8 +78,9 @@ export function Navbar() {
               })}
             </div>
 
-            {/* Right: Theme toggle + mobile hamburger */}
+            {/* Right: Language toggle + Theme toggle + mobile hamburger */}
             <div className="flex items-center gap-2">
+              <LanguageToggle />
               <ThemeToggle />
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
@@ -112,7 +116,7 @@ export function Navbar() {
                             : "text-muted hover:bg-card hover:text-foreground"
                         )}
                       >
-                        {item.label}
+                        {t(item.label)}
                       </a>
                     );
                   })}

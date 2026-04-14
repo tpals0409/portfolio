@@ -6,8 +6,10 @@ import { DIAGRAM_TABS } from "@/lib/constants";
 import { DIAGRAM_DATA } from "@/components/diagrams/diagram-data";
 import SVGDiagram from "@/components/diagrams/SVGDiagram";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n/context";
 
 export default function ArchitectureBlock() {
+  const { t } = useLocale();
   const [activeTab, setActiveTab] = useState(DIAGRAM_TABS[0].id);
   const [isMounted, setIsMounted] = useState(false);
   const [animated, setAnimated] = useState(false);
@@ -66,7 +68,7 @@ export default function ArchitectureBlock() {
 
       {/* Tab description */}
       {currentTab?.description && (
-        <p className="text-sm text-muted">{currentTab.description}</p>
+        <p className="text-sm text-muted">{t(currentTab.description)}</p>
       )}
 
       {/* Diagram Area */}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ThemeProvider } from "next-themes";
+import { LocaleProvider } from "@/lib/i18n/context";
 import "./globals.css";
 
 const pretendard = localFont({
@@ -47,7 +48,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange={false}
         >
-          {children}
+          <LocaleProvider>{children}</LocaleProvider>
         </ThemeProvider>
       </body>
     </html>

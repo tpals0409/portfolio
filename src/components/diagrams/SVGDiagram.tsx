@@ -1,14 +1,16 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
+import type { T } from "@/lib/i18n/types";
+import { useLocale } from "@/lib/i18n/context";
 
 export interface DiagramNode {
   id: string;
-  label: string;
+  label: T;
   x: number;
   y: number;
   delay?: number;
-  tooltip?: string;
+  tooltip?: T;
 }
 
 export interface DiagramEdge {
@@ -59,8 +61,8 @@ function buildPath(x1: number, y1: number, x2: number, y2: number): string {
 
 export default function SVGDiagram({ data }: { data: SVGDiagramData }) {
   const { nodes, edges } = data;
+  const { t } = useLocale();
 
-  // Auto-animate on mount (key change = remount = re-animate)
   const [show, setShow] = useState(false);
   useEffect(() => {
     const id = requestAnimationFrame(() => setShow(true));
@@ -147,9 +149,8 @@ export default function SVGDiagram({ data }: { data: SVGDiagramData }) {
             fill="var(--foreground)"
             style={{ pointerEvents: "none" }}
           >
-            {node.label}
+            {t(node.label)}
           </text>
-          {/* Tooltip text (hidden, shown on hover via CSS) */}
           {node.tooltip && (
             <text
               x={node.x + NODE_W / 2}
@@ -161,7 +162,7 @@ export default function SVGDiagram({ data }: { data: SVGDiagramData }) {
               className="diagram-tooltip"
               style={{ pointerEvents: "none" }}
             >
-              {node.tooltip}
+              {t(node.tooltip)}
             </text>
           )}
         </g>

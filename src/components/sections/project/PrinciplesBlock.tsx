@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import { PRINCIPLES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n/context";
 
 export function PrinciplesBlock() {
+  const { t } = useLocale();
   const hasOddCount = PRINCIPLES.length % 2 !== 0;
 
   return (
@@ -25,7 +27,7 @@ export function PrinciplesBlock() {
 
           return (
             <motion.div
-              key={item.principle}
+              key={t(item.principle)}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -47,14 +49,14 @@ export function PrinciplesBlock() {
                 {item.category}
               </span>
               <h4 className="text-base font-bold text-foreground mt-3 leading-snug">
-                {item.principle}
+                {t(item.principle)}
               </h4>
               <p className="text-sm text-muted mt-2 leading-relaxed">
-                {item.evidence}
+                {t(item.evidence)}
               </p>
               {item.impact && (
                 <p className="text-xs font-medium text-accent-cyan mt-3">
-                  {item.impact}
+                  {t(item.impact)}
                 </p>
               )}
             </motion.div>

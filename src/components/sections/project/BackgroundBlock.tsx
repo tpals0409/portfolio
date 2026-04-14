@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PROJECT } from "@/lib/constants";
 import { BrowserMockup } from "@/components/ui/BrowserMockup";
+import { useLocale } from "@/lib/i18n/context";
 
 export function BackgroundBlock() {
+  const { t } = useLocale();
+
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-8 md:gap-12 items-start">
@@ -18,12 +21,12 @@ export function BackgroundBlock() {
           className="border-l-2 border-accent-cyan pl-6"
         >
           <h3 className="text-2xl md:text-3xl font-bold text-foreground leading-snug">
-            {PROJECT.background.heading}
+            {t(PROJECT.background.heading)}
           </h3>
           <div className="mt-4 space-y-4">
             {PROJECT.background.paragraphs.map((paragraph, i) => (
               <p key={i} className="text-muted leading-relaxed">
-                {paragraph}
+                {t(paragraph)}
               </p>
             ))}
           </div>

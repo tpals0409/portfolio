@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useCountUp } from "@/hooks/useCountUp";
 import type { ProjectStat } from "@/types";
+import { useLocale } from "@/lib/i18n/context";
 
 interface AnimatedCounterProps {
   stat: ProjectStat;
@@ -10,6 +11,7 @@ interface AnimatedCounterProps {
 }
 
 export function AnimatedCounter({ stat, index }: AnimatedCounterProps) {
+  const { t } = useLocale();
   const { current, ref } = useCountUp(stat.value);
 
   const displayValue =
@@ -34,13 +36,13 @@ export function AnimatedCounter({ stat, index }: AnimatedCounterProps) {
         {displayValue}
         {stat.suffix && (
           <span className="bg-gradient-to-r from-accent-purple to-accent-cyan bg-clip-text text-transparent">
-            {stat.suffix}
+            {t(stat.suffix)}
           </span>
         )}
       </p>
-      <p className="mt-2 text-sm text-muted">{stat.label}</p>
+      <p className="mt-2 text-sm text-muted">{t(stat.label)}</p>
       {stat.context && (
-        <p className="mt-1 text-xs text-muted/70">{stat.context}</p>
+        <p className="mt-1 text-xs text-muted/70">{t(stat.context)}</p>
       )}
     </motion.div>
   );

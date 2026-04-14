@@ -3,8 +3,11 @@
 import { motion } from "framer-motion";
 import { PROJECT_STATS } from "@/lib/constants";
 import { AnimatedCounter } from "./AnimatedCounter";
+import { useLocale } from "@/lib/i18n/context";
 
 export function ResultsBlock() {
+  const { t } = useLocale();
+
   return (
     <div>
       <motion.h3
@@ -18,7 +21,7 @@ export function ResultsBlock() {
       </motion.h3>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {PROJECT_STATS.map((stat, index) => (
-          <AnimatedCounter key={stat.label} stat={stat} index={index} />
+          <AnimatedCounter key={t(stat.label)} stat={stat} index={index} />
         ))}
       </div>
     </div>

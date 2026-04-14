@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { ABOUT, TECH_CATEGORIES } from "@/lib/constants";
+import { useLocale } from "@/lib/i18n/context";
 
 function SkillTag({ label }: { label: string }) {
   return (
@@ -46,6 +47,7 @@ function BentoTile({
 }
 
 export function AboutSection() {
+  const { t, ts } = useLocale();
   const catMap: Record<string, (typeof TECH_CATEGORIES)[number]> = {};
   TECH_CATEGORIES.forEach((c) => {
     catMap[c.name] = c;
@@ -60,24 +62,24 @@ export function AboutSection() {
             <div className="mb-8 flex flex-col items-center">
               <Image
                 src="/profile.jpg"
-                alt={`${ABOUT.name} profile`}
+                alt={`${t(ABOUT.name)} profile`}
                 width={160}
                 height={160}
                 className="h-[160px] w-[160px] rounded-full border-2 border-card-border object-cover"
                 priority
               />
-              <p className="mt-5 text-lg font-bold text-foreground">{ABOUT.name}</p>
-              <p className="mt-1 text-sm text-muted">{ABOUT.role}</p>
+              <p className="mt-5 text-lg font-bold text-foreground">{t(ABOUT.name)}</p>
+              <p className="mt-1 text-sm text-muted">{t(ABOUT.role)}</p>
             </div>
             <span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted">
-              Role
+              {ts("ui.role")}
             </span>
             <h2 className="mt-3 text-2xl font-extrabold leading-tight text-foreground md:text-3xl lg:text-[40px]" style={{ letterSpacing: "-0.04em" }}>
               AI DevOps &<br />
               Backend Developer
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-muted">
-              {ABOUT.description}
+              {t(ABOUT.description)}
             </p>
           </BentoTile>
 

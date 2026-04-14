@@ -6,6 +6,7 @@ import { ChevronDown } from "lucide-react";
 import { TECH_DECISIONS } from "@/lib/constants";
 import type { TechDecision } from "@/types";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n/context";
 
 function TechDecisionCard({
   decision,
@@ -20,6 +21,7 @@ function TechDecisionCard({
   isLastOdd: boolean;
   onToggle: () => void;
 }) {
+  const { t } = useLocale();
   const isCyan = decision.color === "cyan";
 
   return (
@@ -45,7 +47,7 @@ function TechDecisionCard({
         >
           {decision.highlight}
         </span>
-        <p className="text-xs text-muted mt-0.5">{decision.highlightLabel}</p>
+        <p className="text-xs text-muted mt-0.5">{t(decision.highlightLabel)}</p>
       </div>
 
       {/* Title + chevron */}
@@ -70,7 +72,7 @@ function TechDecisionCard({
       </div>
 
       {/* Result (always visible) */}
-      <p className="text-sm text-muted">{decision.result}</p>
+      <p className="text-sm text-muted">{t(decision.result)}</p>
 
       {/* Expanded detail */}
       <AnimatePresence>
@@ -84,7 +86,7 @@ function TechDecisionCard({
           >
             <div className="mt-4 pt-4 border-t border-card-border">
               <p className="text-sm text-muted leading-relaxed whitespace-pre-line">
-                {decision.reasoning}
+                {t(decision.reasoning)}
               </p>
             </div>
 
@@ -113,16 +115,16 @@ function TechDecisionCard({
                   <tbody>
                     {decision.comparison.map((row) => (
                       <tr
-                        key={row.criteria}
+                        key={t(row.criteria)}
                         className="border-b border-card-border/50"
                       >
                         <td className="py-2 pr-4 text-muted font-medium whitespace-nowrap">
-                          {row.criteria}
+                          {t(row.criteria)}
                         </td>
                         <td className="py-2 pr-4 text-foreground">
-                          {row.chosen}
+                          {t(row.chosen)}
                         </td>
-                        <td className="py-2 text-muted">{row.alternative}</td>
+                        <td className="py-2 text-muted">{t(row.alternative)}</td>
                       </tr>
                     ))}
                   </tbody>

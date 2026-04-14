@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ProjectSection } from "@/components/sections/ProjectSection";
+import { BlogSection } from "@/components/sections/BlogSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 import { SectionDots } from "@/components/ui/SectionDots";
@@ -25,6 +26,8 @@ export default function Home() {
         <AboutSection />
         <SectionBreak id="brake-project" label="Project" />
         <ProjectSection scrollY={scrollY} />
+        <SectionBreak id="brake-blog" label="Blog" />
+        <BlogSection />
         <SectionBreak id="brake-contact" label="Contact" />
         <ContactSection />
       </main>

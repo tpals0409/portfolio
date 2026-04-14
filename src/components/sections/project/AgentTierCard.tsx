@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import type { AgentTier } from "@/types";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n/context";
 
 interface AgentTierCardProps {
   tier: AgentTier;
@@ -17,6 +18,7 @@ const COLOR_MAP = {
 
 export function AgentTierCard({ tier, index }: AgentTierCardProps) {
   const colors = COLOR_MAP[tier.color as keyof typeof COLOR_MAP] ?? COLOR_MAP.purple;
+  const { t } = useLocale();
 
   return (
     <motion.div
@@ -36,11 +38,11 @@ export function AgentTierCard({ tier, index }: AgentTierCardProps) {
         </span>
         <h4 className="text-lg font-bold text-foreground mt-1">{tier.title}</h4>
       </div>
-      <p className="text-sm text-muted mb-4">{tier.description}</p>
+      <p className="text-sm text-muted mb-4">{t(tier.description)}</p>
       <ul className="space-y-1">
         {tier.agents.map((agent) => (
           <li
-            key={agent.name}
+            key={t(agent.name)}
             className="group/agent flex items-start gap-2 text-sm rounded-lg px-2 py-1.5 -mx-2 transition-colors duration-200 hover:bg-card-border/30 cursor-default"
           >
             <span
@@ -56,10 +58,10 @@ export function AgentTierCard({ tier, index }: AgentTierCardProps) {
                   colors.hover,
                 )}
               >
-                {agent.name}
+                {t(agent.name)}
               </span>
               <p className="text-xs text-muted/70 mt-0.5 transition-colors duration-200 group-hover/agent:text-muted">
-                {agent.role}
+                {t(agent.role)}
               </p>
             </div>
           </li>

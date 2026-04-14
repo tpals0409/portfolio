@@ -1,5 +1,7 @@
+import type { T } from "@/lib/i18n/types";
+
 export interface NavItem {
-  label: string;
+  label: T;
   href: string;
 }
 
@@ -16,22 +18,22 @@ export interface TechItem {
 export interface AgentTier {
   tier: string;
   title: string;
-  description: string;
+  description: T;
   agents: Agent[];
   color: string;
 }
 
 export interface Agent {
-  name: string;
-  role: string;
+  name: T;
+  role: T;
 }
 
 export interface ProjectStat {
-  label: string;
+  label: T;
   value: number;
   prefix?: string;
-  suffix: string;
-  context?: string;
+  suffix: T;
+  context?: T;
 }
 
 export interface ContactLink {
@@ -43,31 +45,31 @@ export interface ContactLink {
 export interface DiagramTab {
   id: string;
   label: string;
-  description?: string;
+  description?: T;
 }
 
 export interface ComparisonRow {
-  criteria: string;
-  chosen: string;
-  alternative: string;
+  criteria: T;
+  chosen: T;
+  alternative: T;
 }
 
 export interface TechDecision {
   title: string;
-  reasoning: string;
-  result: string;
+  reasoning: T;
+  result: T;
   color: string;
   highlight: string;
-  highlightLabel: string;
+  highlightLabel: T;
   comparison?: ComparisonRow[];
   featured?: boolean;
 }
 
 export interface Principle {
   category: string;
-  principle: string;
-  evidence: string;
-  impact?: string;
+  principle: T;
+  evidence: T;
+  impact?: T;
   color: "purple" | "cyan";
 }
 
@@ -75,7 +77,16 @@ export interface CodeSnippet {
   id: string;
   title: string;
   filepath: string;
-  description: string;
+  description: T;
   code: string;
   language: string;
+}
+
+export interface BlogPost {
+  title: T;
+  date: string;
+  tags: string[];
+  category: T;
+  href: string;
+  featured?: boolean;
 }

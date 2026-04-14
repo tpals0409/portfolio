@@ -13,6 +13,7 @@ import {
   CODE_SNIPPETS,
 } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n/context";
 import { BrowserMockup } from "@/components/ui/BrowserMockup";
 import { SectionBreak } from "@/components/ui/SectionBreak";
 import { DIAGRAM_DATA } from "@/components/diagrams/diagram-data";
@@ -59,6 +60,7 @@ function CountUp({
 function ArchitectureSticky({ scrollY }: { scrollY: number }) {
   const archRef = useRef<HTMLDivElement>(null);
   const archProgress = useElementProgress(archRef, scrollY);
+  const { t, ts } = useLocale();
 
   const tabCount = DIAGRAM_TABS.length;
   const zone = ease.range(archProgress, 0.15, 0.85, null);
@@ -86,7 +88,7 @@ function ArchitectureSticky({ scrollY }: { scrollY: number }) {
           >
             <div>
               <span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted">
-                System Design
+                {ts("ui.systemDesign")}
               </span>
               <h3
                 className="mt-2 font-extrabold text-foreground"
@@ -96,7 +98,7 @@ function ArchitectureSticky({ scrollY }: { scrollY: number }) {
               </h3>
               {activeTab.description && (
                 <p className="mt-1 line-clamp-2 text-[12px] leading-relaxed text-muted md:mt-2 md:line-clamp-none md:text-[13px]">
-                  {activeTab.description}
+                  {t(activeTab.description)}
                 </p>
               )}
             </div>
@@ -125,7 +127,7 @@ function ArchitectureSticky({ scrollY }: { scrollY: number }) {
                   style={{ animation: "archScrollPulse 2s ease-in-out infinite" }}>
                   <path d="M3 5L7 9L11 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                <span className="text-[11px] font-medium tracking-wide">scroll</span>
+                <span className="text-[11px] font-medium tracking-wide">{ts("ui.scroll")}</span>
               </div>
             </div>
           </div>
@@ -161,14 +163,16 @@ function TechCard({
 
 /* ── Principles (below cinematic) ── */
 function PrinciplesSection() {
+  const { t, ts } = useLocale();
+
   return (
     <div className="bg-card">
     <div className="mx-auto flex min-h-screen max-w-[1100px] flex-col justify-center px-4 py-20 md:px-6 md:py-32">
       <span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted">
-        Lessons Learned
+        {ts("ui.lessonsLearned")}
       </span>
       <h3 className="mt-3 mb-8 text-2xl font-extrabold tracking-tight text-foreground">
-        Troubleshooting
+        {ts("ui.troubleshooting")}
       </h3>
       <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
         {PRINCIPLES.map((item, index) => {
@@ -178,7 +182,7 @@ function PrinciplesSection() {
 
           return (
             <motion.div
-              key={item.principle}
+              key={t(item.principle)}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -199,14 +203,14 @@ function PrinciplesSection() {
                 {item.category}
               </span>
               <h4 className="mt-3 text-base font-bold leading-snug text-foreground">
-                {item.principle}
+                {t(item.principle)}
               </h4>
               <p className="mt-2 text-sm leading-relaxed text-muted">
-                {item.evidence}
+                {t(item.evidence)}
               </p>
               {item.impact && (
                 <p className="mt-3 text-xs font-medium text-foreground">
-                  {item.impact}
+                  {t(item.impact)}
                 </p>
               )}
             </motion.div>
@@ -222,6 +226,7 @@ function PrinciplesSection() {
 function CodeShowcaseSticky({ scrollY }: { scrollY: number }) {
   const codeRef = useRef<HTMLDivElement>(null);
   const codeProgress = useElementProgress(codeRef, scrollY);
+  const { t, ts } = useLocale();
 
   const snippetCount = CODE_SNIPPETS.length;
   const zone = ease.range(codeProgress, 0.15, 0.85, null);
@@ -247,7 +252,7 @@ function CodeShowcaseSticky({ scrollY }: { scrollY: number }) {
           >
             <div>
               <span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted">
-                Implementation
+                {ts("ui.implementation")}
               </span>
               <h3
                 className="mt-2 font-extrabold text-foreground"
@@ -257,7 +262,7 @@ function CodeShowcaseSticky({ scrollY }: { scrollY: number }) {
               </h3>
               <p className="mt-1 font-mono text-xs text-muted">{current.filepath}</p>
               <p className="mt-1 line-clamp-2 text-[12px] leading-relaxed text-muted md:mt-2 md:line-clamp-none md:text-[13px]">
-                {current.description}
+                {t(current.description)}
               </p>
             </div>
 
@@ -284,7 +289,7 @@ function CodeShowcaseSticky({ scrollY }: { scrollY: number }) {
                   style={{ animation: "archScrollPulse 2s ease-in-out infinite" }}>
                   <path d="M3 5L7 9L11 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                <span className="text-[11px] font-medium tracking-wide">scroll</span>
+                <span className="text-[11px] font-medium tracking-wide">{ts("ui.scroll")}</span>
               </div>
             </div>
           </div>
@@ -314,6 +319,7 @@ function CodeShowcaseSticky({ scrollY }: { scrollY: number }) {
 export function ProjectSection({ scrollY }: { scrollY: number }) {
   const horizRef = useRef<HTMLDivElement>(null);
   const horizProgress = useElementProgress(horizRef, scrollY);
+  const { t, ts } = useLocale();
 
   /* Phase 3: Horizontal scroll */
   const cardWidth = 300;
@@ -334,7 +340,7 @@ export function ProjectSection({ scrollY }: { scrollY: number }) {
       {/* ── Phase 1: Big Numbers + Project Overview ── */}
       <div className="flex min-h-screen flex-col items-center justify-center bg-background px-6 py-20">
         <h2 className="mb-14 text-xs font-semibold uppercase tracking-[0.1em] text-muted">
-          {PROJECT.title} · {PROJECT.subtitle.split("—")[0].trim()}
+          {PROJECT.title} · {t(PROJECT.subtitle).split("—")[0].trim()}
         </h2>
         <div className="flex flex-wrap justify-center gap-x-20 gap-y-10">
           {PROJECT_STATS.map((item, i) => (
@@ -349,16 +355,16 @@ export function ProjectSection({ scrollY }: { scrollY: number }) {
               >
                 <CountUp
                   target={item.value}
-                  suffix={item.suffix}
+                  suffix={t(item.suffix)}
                   prefix={item.prefix}
                 />
               </div>
               <div className="mt-3.5 text-sm font-medium text-muted">
-                {item.label}
+                {t(item.label)}
               </div>
               {item.context && (
                 <div className="mt-1 text-xs text-muted/60">
-                  {item.context}
+                  {t(item.context)}
                 </div>
               )}
             </div>
@@ -375,12 +381,12 @@ export function ProjectSection({ scrollY }: { scrollY: number }) {
         >
           <div className="border-l-2 border-foreground/20 pl-6">
             <h3 className="text-2xl font-extrabold leading-snug tracking-tight text-foreground md:text-3xl">
-              {PROJECT.background.heading}
+              {t(PROJECT.background.heading)}
             </h3>
             <div className="mt-4 space-y-4">
               {PROJECT.background.paragraphs.map((p, i) => (
                 <p key={i} className="text-[15px] leading-relaxed text-muted">
-                  {p}
+                  {t(p)}
                 </p>
               ))}
             </div>
@@ -429,7 +435,7 @@ export function ProjectSection({ scrollY }: { scrollY: number }) {
 
           <div className="mx-auto w-full max-w-[1100px]">
           <span className="mb-3 block text-xs font-semibold uppercase tracking-[0.1em] text-muted">
-            Tech Decisions & Troubleshooting
+            {ts("ui.techDecisionsSub")}
           </span>
           <h3
             className="mb-11 font-extrabold text-foreground"
@@ -438,7 +444,7 @@ export function ProjectSection({ scrollY }: { scrollY: number }) {
               letterSpacing: "-0.03em",
             }}
           >
-            기술적 의사결정
+            {ts("ui.techDecisions")}
           </h3>
           </div>
 
@@ -450,7 +456,7 @@ export function ProjectSection({ scrollY }: { scrollY: number }) {
             }}
           >
             {TECH_DECISIONS.map((card, i) => (
-              <TechCard key={i} title={card.title} desc={card.reasoning} />
+              <TechCard key={i} title={card.title} desc={t(card.reasoning)} />
             ))}
           </div>
 
@@ -479,7 +485,7 @@ export function ProjectSection({ scrollY }: { scrollY: number }) {
                 />
               </svg>
               <span className="whitespace-nowrap text-[11px] font-medium tracking-wide text-muted">
-                스크롤하여 더 보기
+                {ts("ui.scrollMore")}
               </span>
             </div>
             <div className="h-[3px] w-[100px] overflow-hidden rounded-sm bg-card-border">

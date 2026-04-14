@@ -5,6 +5,7 @@ import { useInView } from "framer-motion";
 // eslint-disable-next-line @typescript-eslint/no-deprecated
 import { Github, Mail, Globe } from "lucide-react";
 import { CONTACT } from "@/lib/constants";
+import { useLocale } from "@/lib/i18n/context";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
   github: Github, // eslint-disable-line @typescript-eslint/no-deprecated
@@ -16,6 +17,7 @@ export function ContactSection() {
   const [hoveredIdx, setHoveredIdx] = useState(-1);
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.2 });
+  const { t } = useLocale();
 
   return (
     <section
@@ -35,10 +37,10 @@ export function ContactSection() {
           className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl md:text-5xl"
           style={{ letterSpacing: "-0.04em", lineHeight: 1.3 }}
         >
-          {CONTACT.title}
+          {t(CONTACT.title)}
         </h2>
         <p className="mt-4 text-base text-muted" style={{ lineHeight: 1.7 }}>
-          {CONTACT.subtitle}
+          {t(CONTACT.subtitle)}
         </p>
       </div>
 

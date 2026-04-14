@@ -3,10 +3,12 @@
 import { useRef } from "react";
 import { useElementProgress, ease } from "@/hooks/useElementProgress";
 import { HERO } from "@/lib/constants";
+import { useLocale } from "@/lib/i18n/context";
 
 export function HeroSection({ scrollY }: { scrollY: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const progress = useElementProgress(ref, scrollY);
+  const { t } = useLocale();
 
   const blurT = ease.range(progress, 0.08, 0.42, ease.outQuart);
   const scaleT = ease.range(progress, 0.08, 0.48, ease.inOut);
@@ -18,7 +20,7 @@ export function HeroSection({ scrollY }: { scrollY: number }) {
   const subY = 30 * (1 - subT);
   const indicatorOpacity = Math.max(0, 1 - scrollY / 150);
 
-  const lines = HERO.title.split("\n");
+  const lines = t(HERO.title).split("\n");
 
   return (
     <div id="hero" ref={ref} style={{ height: "220vh", position: "relative" }}>
@@ -51,7 +53,7 @@ export function HeroSection({ scrollY }: { scrollY: number }) {
             transform: `translateY(${subY}px)`,
           }}
         >
-          {HERO.subtitle}
+          {t(HERO.subtitle)}
         </p>
 
         {/* Mouse scroll indicator */}
@@ -91,7 +93,7 @@ export function HeroSection({ scrollY }: { scrollY: number }) {
             className="text-[11px] font-medium uppercase tracking-[0.1em] text-muted"
             style={{ animation: "scrollTextFade 2s ease infinite" }}
           >
-            {HERO.scrollLabel}
+            {t(HERO.scrollLabel)}
           </span>
         </div>
       </div>

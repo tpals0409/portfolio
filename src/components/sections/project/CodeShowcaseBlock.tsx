@@ -4,8 +4,10 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CODE_SNIPPETS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n/context";
 
 export function CodeShowcaseBlock() {
+  const { t } = useLocale();
   const [activeTab, setActiveTab] = useState(CODE_SNIPPETS[0].id);
   const current = CODE_SNIPPETS.find((s) => s.id === activeTab) ?? CODE_SNIPPETS[0];
 
@@ -58,7 +60,7 @@ export function CodeShowcaseBlock() {
           <p className="text-xs text-muted font-mono mb-1">
             {current.filepath}
           </p>
-          <p className="text-sm text-muted mb-3">{current.description}</p>
+          <p className="text-sm text-muted mb-3">{t(current.description)}</p>
           <div className="bg-card border border-card-border rounded-xl p-4 max-h-[400px] overflow-y-auto code-block">
             <pre className="font-mono text-sm text-foreground whitespace-pre-wrap">
               <code>{current.code}</code>
