@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AGENT_TIERS } from "@/lib/constants";
-import { AgentTierCard } from "./AgentTierCard";
+import { AGENT_ECHELONS } from "@/lib/constants";
+import { AgentEchelonCard } from "./AgentEchelonCard";
 
 export function AIDrivenBlock() {
   return (
@@ -17,8 +17,8 @@ export function AIDrivenBlock() {
         AI-Driven Architecture
       </motion.h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {AGENT_TIERS.map((tier, index) => (
-          <AgentTierCard key={tier.tier} tier={tier} index={index} />
+        {AGENT_ECHELONS.map((echelon, index) => (
+          <AgentEchelonCard key={echelon.echelon} echelon={echelon} index={index} />
         ))}
       </div>
     </div>

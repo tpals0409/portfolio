@@ -1,12 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { AgentTier } from "@/types";
+import type { AgentEchelon } from "@/types";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/lib/i18n/context";
 
-interface AgentTierCardProps {
-  tier: AgentTier;
+interface AgentEchelonCardProps {
+  echelon: AgentEchelon;
   index: number;
 }
 
@@ -16,8 +16,8 @@ const COLOR_MAP = {
   cyan: { text: "text-accent-cyan", bg: "bg-accent-cyan", hover: "group-hover/agent:text-accent-cyan" },
 } as const;
 
-export function AgentTierCard({ tier, index }: AgentTierCardProps) {
-  const colors = COLOR_MAP[tier.color as keyof typeof COLOR_MAP] ?? COLOR_MAP.purple;
+export function AgentEchelonCard({ echelon, index }: AgentEchelonCardProps) {
+  const colors = COLOR_MAP[echelon.color as keyof typeof COLOR_MAP] ?? COLOR_MAP.purple;
   const { t } = useLocale();
 
   return (
@@ -34,13 +34,13 @@ export function AgentTierCard({ tier, index }: AgentTierCardProps) {
     >
       <div className="mb-4">
         <span className={cn("text-sm font-medium", colors.text)}>
-          {tier.tier}
+          {echelon.echelon}
         </span>
-        <h4 className="text-lg font-bold text-foreground mt-1">{tier.title}</h4>
+        <h4 className="text-lg font-bold text-foreground mt-1">{echelon.title}</h4>
       </div>
-      <p className="text-sm text-muted mb-4">{t(tier.description)}</p>
+      <p className="text-sm text-muted mb-4">{t(echelon.description)}</p>
       <ul className="space-y-1">
-        {tier.agents.map((agent) => (
+        {echelon.agents.map((agent) => (
           <li
             key={t(agent.name)}
             className="group/agent flex items-start gap-2 text-sm rounded-lg px-2 py-1.5 -mx-2 transition-colors duration-200 hover:bg-card-border/30 cursor-default"

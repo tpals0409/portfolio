@@ -1,7 +1,7 @@
 import type {
   NavItem,
   TechCategory,
-  AgentTier,
+  AgentEchelon,
   ProjectStat,
   ContactLink,
   DiagramTab,
@@ -121,9 +121,9 @@ export const PROJECT = {
   },
 };
 
-export const AGENT_TIERS: AgentTier[] = [
+export const AGENT_ECHELONS: AgentEchelon[] = [
   {
-    tier: "Tier 1",
+    echelon: "Echelon 1",
     title: "Core Analysis",
     description: {
       ko: "프로젝트 기반 설계 — 인프라, 보안, 배포 의사결정",
@@ -138,7 +138,7 @@ export const AGENT_TIERS: AgentTier[] = [
     color: "purple",
   },
   {
-    tier: "Tier 2",
+    echelon: "Echelon 2",
     title: "Learning Intelligence",
     description: {
       ko: "도메인 구현 — API, 문제관리, Saga, UI 구현",
@@ -153,7 +153,7 @@ export const AGENT_TIERS: AgentTier[] = [
     color: "mid",
   },
   {
-    tier: "Tier 3",
+    echelon: "Echelon 3",
     title: "Operations",
     description: {
       ko: "운영 & 자동화 — AI 분석, 실시간 알림, GitHub 연동, 문서화",
@@ -477,7 +477,7 @@ export const PROJECT_STATS: ProjectStat[] = [
 ];
 
 export const DIAGRAM_TABS: DiagramTab[] = [
-  { id: "agent-orchestration", label: "Agent Orchestration", description: { ko: "12개 AI 에이전트 3-Tier 오케스트레이션 — 설계·구현·운영 역할 분담, 프롬프트 기반 페르소나", en: "12 AI agents in 3-Tier orchestration — role separation across design, implementation & operations, prompt-based personas" } },
+  { id: "agent-orchestration", label: "Agent Orchestration", description: { ko: "12개 AI 에이전트 3-Echelon 오케스트레이션 — 설계·구현·운영 역할 분담, 프롬프트 기반 페르소나", en: "12 AI agents in 3-Echelon orchestration — role separation across design, implementation & operations, prompt-based personas" } },
   { id: "overall", label: "Overall", description: { ko: "Next.js → Gateway → 6개 마이크로서비스 + 비동기 워커 (PostgreSQL, RabbitMQ, Redis)", en: "Next.js → Gateway → 6 microservices + async workers (PostgreSQL, RabbitMQ, Redis)" } },
   { id: "api-gateway", label: "API Gateway", description: { ko: "OAuth + JWT + Rate Limit + 프록시 미들웨어 파이프라인 (화이트리스트 기반 라우팅)", en: "OAuth + JWT + Rate Limit + proxy middleware pipeline (whitelist-based routing)" } },
   { id: "ai-pipeline", label: "AI Pipeline", description: { ko: "코드 제출 → GitHub Push → AI 분석 전 과정 자동화 (SSE 실시간 스트리밍)", en: "Code submission → GitHub Push → AI analysis full automation (SSE real-time streaming)" } },

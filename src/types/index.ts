@@ -15,8 +15,8 @@ export interface TechItem {
   color?: string;
 }
 
-export interface AgentTier {
-  tier: string;
+export interface AgentEchelon {
+  echelon: string;
   title: string;
   description: T;
   agents: Agent[];
