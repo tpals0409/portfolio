@@ -39,7 +39,8 @@ function BentoTile({
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className={`rounded-2xl border border-card-border bg-card p-7 shadow-sm ${className}`}
+      whileHover={{ y: -2 }}
+      className={`rounded-2xl border border-card-border bg-card p-7 shadow-sm transition-all duration-200 hover:shadow-lg hover:shadow-accent-purple/5 hover:border-accent-purple/50 ${className}`}
     >
       {children}
     </motion.div>

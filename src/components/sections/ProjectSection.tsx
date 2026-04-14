@@ -153,12 +153,16 @@ function TechCard({
   desc: string;
 }) {
   return (
-    <div className="flex-none rounded-2xl border border-card-border bg-card p-5 md:p-7" style={{ width: 280 }}>
+    <motion.div
+      whileHover={hover.lift}
+      className="flex-none rounded-2xl border border-card-border bg-card p-5 transition-all duration-200 hover:shadow-lg hover:shadow-accent-purple/5 hover:border-accent-purple/50 md:p-7"
+      style={{ width: 280 }}
+    >
       <h4 className="mb-3 text-lg font-extrabold tracking-tight text-foreground">
         {title}
       </h4>
       <p className="text-sm leading-relaxed text-muted">{desc}</p>
-    </div>
+    </motion.div>
   );
 }
 
