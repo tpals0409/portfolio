@@ -75,8 +75,8 @@ export function AboutSection() {
               {ts("ui.role")}
             </span>
             <h2 className="mt-3 text-2xl font-extrabold leading-tight text-foreground md:text-3xl lg:text-[40px]" style={{ letterSpacing: "-0.04em" }}>
-              AI DevOps &<br />
-              Backend Developer
+              Agentic AI Engineer &<br />
+              Builder
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-muted">
               {t(ABOUT.description)}

@@ -11,12 +11,13 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "김세민 | AI DevOps Engineer",
+  title: "김세민 | Agentic AI Engineer & Builder",
   description:
-    "AI 에이전트 12인팀을 설계하고, 6개 마이크로서비스를 구축한 AI DevOps 엔지니어 김세민의 포트폴리오",
+    "에이전트를 설계·지휘하며 E2E, A2A 프로덕션 시스템을 구축합니다.",
   keywords: [
-    "AI DevOps",
-    "Backend Developer",
+    "Agentic AI",
+    "AI Agent",
+    "AI Orchestration",
     "Portfolio",
     "김세민",
     "Kim Semin",
@@ -24,9 +25,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "김세민" }],
   openGraph: {
-    title: "김세민 | AI DevOps Engineer",
+    title: "김세민 | Agentic AI Engineer & Builder",
     description:
-      "AI 에이전트 12인팀을 설계하고 프로덕션까지 배포한 실행 중심 엔지니어",
+      "에이전트를 설계·지휘하며 E2E, A2A 프로덕션 시스템을 구축합니다.",
     type: "website",
     locale: "ko_KR",
   },
