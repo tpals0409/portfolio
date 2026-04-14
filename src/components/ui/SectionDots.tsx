@@ -39,12 +39,14 @@ export function SectionDots({ scrollY }: { scrollY: number }) {
       }}
     >
       {sections.map((s, i) => (
-        <div
+        <button
           key={i}
+          type="button"
           onClick={() => scrollTo(s.id)}
           onMouseEnter={() => setHoveredIdx(i)}
           onMouseLeave={() => setHoveredIdx(-1)}
-          className="flex cursor-pointer flex-row-reverse items-center gap-2.5"
+          className="flex cursor-pointer flex-row-reverse items-center gap-2.5 bg-transparent border-none p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple/50 rounded-full"
+          aria-label={`Scroll to ${s.label}`}
         >
           <div
             className="h-2 rounded-full transition-all duration-400"
@@ -71,7 +73,7 @@ export function SectionDots({ scrollY }: { scrollY: number }) {
           >
             {s.label}
           </span>
-        </div>
+        </button>
       ))}
     </div>
   );

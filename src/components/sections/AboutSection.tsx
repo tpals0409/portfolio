@@ -31,11 +31,11 @@ function BentoTile({
       ref={ref}
       animate={{
         opacity: inView ? 1 : 0,
-        y: inView ? 0 : 44,
+        y: inView ? 0 : 24,
         scale: inView ? 1 : 0.97,
       }}
       transition={{
-        duration: 0.7,
+        duration: 0.6,
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}

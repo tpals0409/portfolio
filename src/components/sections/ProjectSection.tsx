@@ -14,6 +14,7 @@ import {
 } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/lib/i18n/context";
+import { duration, easing, reveal, hover } from "@/lib/motion";
 import { BrowserMockup } from "@/components/ui/BrowserMockup";
 import { SectionBreak } from "@/components/ui/SectionBreak";
 import { DIAGRAM_DATA } from "@/components/diagrams/diagram-data";
@@ -183,12 +184,13 @@ function PrinciplesSection() {
           return (
             <motion.div
               key={t(item.principle)}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={reveal.initial}
+              whileInView={reveal.animate}
+              whileHover={hover.lift}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              transition={reveal.staggered(index)}
               className={cn(
-                "rounded-2xl border border-card-border bg-background p-7 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5",
+                "rounded-2xl border border-card-border bg-background p-7 transition-all duration-200 hover:shadow-lg hover:shadow-accent-purple/5 hover:border-accent-purple/50",
                 hasOddCount && isLast && "md:col-span-2"
               )}
             >
@@ -373,10 +375,10 @@ export function ProjectSection({ scrollY }: { scrollY: number }) {
 
         {/* Project screenshot + description */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={reveal.initial}
+          whileInView={reveal.animate}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: duration.reveal, ease: easing.reveal }}
           className="mt-20 grid w-full max-w-[1100px] grid-cols-1 items-center gap-10 md:grid-cols-[1.2fr_1fr]"
         >
           <div className="border-l-2 border-foreground/20 pl-6">
@@ -402,10 +404,10 @@ export function ProjectSection({ scrollY }: { scrollY: number }) {
               href={`https://${PROJECT.url}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1 text-sm text-foreground hover:underline"
+              className="group mt-3 inline-flex items-center gap-1 text-sm text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple/50 rounded-sm"
             >
               {PROJECT.url}
-              <ArrowUpRight className="h-3.5 w-3.5" />
+              <ArrowUpRight className="h-3.5 w-3.5 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
           </div>
         </motion.div>

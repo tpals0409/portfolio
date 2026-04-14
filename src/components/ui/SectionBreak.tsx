@@ -24,7 +24,7 @@ export function SectionBreak({ id, label }: SectionBreakProps) {
           opacity: inView ? 1 : 0,
           y: inView ? 0 : 12,
         }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="h-px w-8 bg-card-border" />
         <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">

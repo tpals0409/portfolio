@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { BLOG } from "@/lib/constants";
 import { useLocale } from "@/lib/i18n/context";
+import { duration, easing, reveal } from "@/lib/motion";
 import type { BlogPost } from "@/types";
 
 function PostTile({
@@ -24,13 +25,13 @@ function PostTile({
       ref={ref}
       animate={{
         opacity: inView ? 1 : 0,
-        y: inView ? 0 : 44,
+        y: inView ? 0 : 24,
         scale: inView ? 1 : 0.97,
       }}
       transition={{
-        duration: 0.7,
+        duration: duration.reveal,
         delay,
-        ease: [0.22, 1, 0.36, 1],
+        ease: easing.reveal,
       }}
       className={className}
     >
@@ -46,7 +47,7 @@ function FeaturedPost({ post }: { post: BlogPost }) {
       href={post.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex h-full flex-col justify-between rounded-2xl border border-card-border bg-foreground p-7 text-background transition-shadow hover:shadow-lg"
+      className="group flex h-full flex-col justify-between rounded-2xl border border-card-border bg-foreground p-7 text-background transition-all duration-200 hover:shadow-lg hover:shadow-accent-purple/5 hover:border-accent-purple/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple/50"
     >
       <div>
         <span className="text-xs font-semibold uppercase tracking-[0.1em] opacity-60">
@@ -67,7 +68,7 @@ function FeaturedPost({ post }: { post: BlogPost }) {
             </span>
           ))}
         </div>
-        <ArrowUpRight className="h-5 w-5 opacity-40 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" />
+        <ArrowUpRight className="h-5 w-5 opacity-40 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" />
       </div>
     </a>
   );
@@ -80,7 +81,7 @@ function CompactPost({ post }: { post: BlogPost }) {
       href={post.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex h-full flex-col justify-between rounded-2xl border border-card-border bg-background p-6 transition-shadow hover:shadow-lg"
+      className="group flex h-full flex-col justify-between rounded-2xl border border-card-border bg-background p-6 transition-all duration-200 hover:shadow-lg hover:shadow-accent-purple/5 hover:border-accent-purple/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple/50"
     >
       <div>
         <span className="text-[11px] font-medium text-muted">
@@ -101,7 +102,7 @@ function CompactPost({ post }: { post: BlogPost }) {
             </span>
           ))}
         </div>
-        <ArrowUpRight className="h-4 w-4 text-muted opacity-0 transition-all group-hover:opacity-100" />
+        <ArrowUpRight className="h-4 w-4 text-muted opacity-0 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-60" />
       </div>
     </a>
   );
@@ -114,7 +115,7 @@ function SmallPost({ post }: { post: BlogPost }) {
       href={post.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex h-full items-center justify-between rounded-2xl border border-card-border bg-background p-5 transition-shadow hover:shadow-lg"
+      className="group flex h-full items-center justify-between rounded-2xl border border-card-border bg-background p-5 transition-all duration-200 hover:shadow-lg hover:shadow-accent-purple/5 hover:border-accent-purple/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple/50"
     >
       <div>
         <h4 className="text-sm font-bold tracking-tight text-foreground">
@@ -122,7 +123,7 @@ function SmallPost({ post }: { post: BlogPost }) {
         </h4>
         <span className="mt-1 block text-[11px] text-muted">{post.date}</span>
       </div>
-      <ArrowUpRight className="h-4 w-4 flex-none text-muted opacity-0 transition-all group-hover:opacity-100" />
+      <ArrowUpRight className="h-4 w-4 flex-none text-muted opacity-0 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-60" />
     </a>
   );
 }
@@ -183,7 +184,7 @@ export function BlogSection() {
             href={BLOG.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+            className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition-all duration-200 hover:shadow-lg hover:shadow-accent-purple/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple/50"
           >
             {ts("ui.blogCta")}
             <ArrowUpRight className="h-4 w-4" />
