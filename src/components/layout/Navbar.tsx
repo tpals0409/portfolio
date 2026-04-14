@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { useLocale } from "@/lib/i18n/context";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { LanguageToggle } from "@/components/ui/LanguageToggle";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -80,7 +79,6 @@ export function Navbar() {
 
             {/* Right: Language toggle + Theme toggle + mobile hamburger */}
             <div className="flex items-center gap-2">
-              <LanguageToggle />
               <ThemeToggle />
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
