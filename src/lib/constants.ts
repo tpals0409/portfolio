@@ -29,7 +29,7 @@ export const HERO = {
 
 export const ABOUT = {
   name: { ko: "김세민", en: "Semin Kim" },
-  role: { ko: "AI DevOps / Backend Developer", en: "AI DevOps / Backend Developer" },
+  role: { ko: "Agentic AI Engineer & Builder", en: "Agentic AI Engineer & Builder" },
   description: {
     ko: "혼자서 AI 에이전트 12인팀을 설계하고 3개월 만에 프로덕션까지 배포한 실행 중심 엔지니어입니다. 설계부터 배포, 모니터링까지 전 과정을 책임집니다.",
     en: "An execution-driven engineer who designed a 12-member AI agent team and deployed it to production in 3 months. Responsible for the entire process from design to deployment and monitoring.",
