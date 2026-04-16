@@ -7,6 +7,19 @@ import { BLOG } from "@/lib/constants";
 import { useLocale } from "@/lib/i18n/context";
 import { duration, easing, reveal } from "@/lib/motion";
 import type { BlogPost } from "@/types";
+import type { Locale } from "@/lib/i18n/types";
+
+/**
+ * 블로그 URL을 현재 로케일에 맞게 변환한다.
+ * - ko: https://blog.algo-su.com/posts/{slug}
+ * - en: https://blog.algo-su.com/en/posts/{slug}
+ */
+function localizeBlogHref(href: string, locale: Locale): string {
+  if (locale === "en") {
+    return href.replace("/posts/", "/en/posts/");
+  }
+  return href;
+}
 
 function PostTile({
   children,
@@ -41,10 +54,10 @@ function PostTile({
 }
 
 function FeaturedPost({ post }: { post: BlogPost }) {
-  const { t, ts } = useLocale();
+  const { t, ts, locale } = useLocale();
   return (
     <a
-      href={post.href}
+      href={localizeBlogHref(post.href, locale)}
       target="_blank"
       rel="noopener noreferrer"
       className="group flex h-full flex-col justify-between rounded-2xl border border-card-border bg-foreground p-7 text-background transition-all duration-200 hover:shadow-lg hover:shadow-accent-purple/5 hover:border-accent-purple/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple/50"
@@ -75,10 +88,10 @@ function FeaturedPost({ post }: { post: BlogPost }) {
 }
 
 function CompactPost({ post }: { post: BlogPost }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   return (
     <a
-      href={post.href}
+      href={localizeBlogHref(post.href, locale)}
       target="_blank"
       rel="noopener noreferrer"
       className="group flex h-full flex-col justify-between rounded-2xl border border-card-border bg-background p-6 transition-all duration-200 hover:shadow-lg hover:shadow-accent-purple/5 hover:border-accent-purple/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple/50"
@@ -109,10 +122,10 @@ function CompactPost({ post }: { post: BlogPost }) {
 }
 
 function SmallPost({ post }: { post: BlogPost }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   return (
     <a
-      href={post.href}
+      href={localizeBlogHref(post.href, locale)}
       target="_blank"
       rel="noopener noreferrer"
       className="group flex h-full items-center justify-between rounded-2xl border border-card-border bg-background p-5 transition-all duration-200 hover:shadow-lg hover:shadow-accent-purple/5 hover:border-accent-purple/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple/50"
@@ -129,8 +142,9 @@ function SmallPost({ post }: { post: BlogPost }) {
 }
 
 export function BlogSection() {
-  const { t, ts } = useLocale();
+  const { t, ts, locale } = useLocale();
   const posts = BLOG.posts;
+  const blogRootUrl = locale === "en" ? `${BLOG.url}/en` : BLOG.url;
   const featured = posts[0];
   const compact = posts.slice(1, 3);
   const small = posts.slice(3, 6);
@@ -181,7 +195,7 @@ export function BlogSection() {
         {/* CTA */}
         <PostTile delay={0.56} className="mt-10 text-center">
           <a
-            href={BLOG.url}
+            href={blogRootUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition-all duration-200 hover:shadow-lg hover:shadow-accent-purple/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple/50"
